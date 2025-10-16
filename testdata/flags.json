@@ -1,0 +1,60 @@
+{
+  "flags": [
+    {
+      "name": "new_checkout",
+      "enabled": true,
+      "rollout": 50,
+      "conditions": [
+        {
+          "attribute": "country",
+          "operator": "in",
+          "value": ["US", "CA"]
+        },
+        {
+          "attribute": "plan",
+          "operator": "==",
+          "value": "premium"
+        }
+      ]
+    },
+    {
+      "name": "dark_mode",
+      "enabled": true,
+      "rollout": 100
+    },
+    {
+      "name": "beta_features",
+      "enabled": true,
+      "rollout": 25,
+      "rollout_key": "user_id",
+      "conditions": [
+        {
+          "attribute": "beta_tester",
+          "operator": "==",
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "pricing_experiment",
+      "enabled": true,
+      "rollout_key": "user_id",
+      "default_variant": "control",
+      "variants": [
+        {
+          "name": "control",
+          "weight": 34
+        },
+        {
+          "name": "price_low",
+          "weight": 33
+        },
+        {
+          "name": "price_high",
+          "weight": 33
+        }
+      ]
+    }
+  ]
+}
+
