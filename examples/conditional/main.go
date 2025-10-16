@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/pedram/toggo"
+	"github.com/pedrampdd/toggo"
 )
 
 func main() {

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/pedram/toggo"
-	"github.com/pedram/toggo/loader"
+	"github.com/pedrampdd/toggo"
+	"github.com/pedrampdd/toggo/loader"
 )
 
 func main() {

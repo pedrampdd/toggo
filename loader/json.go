@@ -5,7 +5,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/pedram/toggo"
+	"github.com/pedrampdd/toggo"
 )
 
 // JSONLoader loads feature flags from JSON files or readers

@@ -1,7 +1,7 @@
 package loader
 
 import (
-	"github.com/pedram/toggo"
+	"github.com/pedrampdd/toggo"
 )
 
 // Loader defines the interface for loading feature flags from various sources

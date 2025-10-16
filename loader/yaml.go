@@ -4,7 +4,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/pedram/toggo"
+	"github.com/pedrampdd/toggo"
 	"gopkg.in/yaml.v3"
 )
 

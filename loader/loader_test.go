@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/pedram/toggo"
+	"github.com/pedrampdd/toggo"
 )
 
 func TestJSONLoader_LoadFromFile(t *testing.T) {

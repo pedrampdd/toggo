@@ -1,4 +1,4 @@
-module github.com/pedram/toggo
+module github.com/pedrampdd/toggo
 
 go 1.21
 

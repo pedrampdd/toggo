@@ -20,7 +20,7 @@ A flexible, performant, and production-ready feature flag and A/B testing SDK fo
 ## Installation
 
 ```bash
-go get github.com/pedram/toggo
+go get github.com/pedrampdd/toggo
 ```
 
 ## Quick Start
@@ -30,7 +30,7 @@ package main
 
 import (
     "fmt"
-    "github.com/pedram/toggo"
+    "github.com/pedrampdd/toggo"
 )
 
 func main() {
@@ -245,7 +245,7 @@ case "price_high":
 ```
 
 ```go
-import "github.com/pedram/toggo/loader"
+import "github.com/pedrampdd/toggo/loader"
 
 store := toggo.NewStore()
 l := loader.NewJSONFile("flags.json")
@@ -269,7 +269,7 @@ flags:
 ```
 
 ```go
-import "github.com/pedram/toggo/loader"
+import "github.com/pedrampdd/toggo/loader"
 
 store := toggo.NewStore()
 l := loader.NewYAMLFile("flags.yaml")

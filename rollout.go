@@ -3,7 +3,7 @@ package toggo
 import (
 	"fmt"
 
-	"github.com/pedram/toggo/internal/hash"
+	"github.com/pedrampdd/toggo/internal/hash"
 )
 
 // RolloutStrategy defines how rollout decisions are made
