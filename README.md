@@ -11,6 +11,7 @@ A flexible, performant, and production-ready feature flag and A/B testing SDK fo
 - 📊 **Percentage-based rollouts** - Gradually roll out features with deterministic hashing
 - 🎯 **Conditional targeting** - Target users based on attributes (country, plan, custom fields)
 - 🧪 **A/B testing** - Run experiments with multiple variants
+- ⏱️ **Switchback testing** - Time-based experimentation for marketplace and system-wide tests
 - 🔒 **Thread-safe** - Safe for concurrent access
 - 📝 **JSON/YAML configuration** - Load flags from configuration files
 - 🎨 **Flexible operators** - Support for ==, !=, in, >, <, contains, regex, and more
@@ -221,6 +222,72 @@ case "price_high":
 }
 ```
 
+### Switchback Testing
+
+Switchback testing is a time-based experimentation method where **all users** see the same variant at the same time, and the variant switches at regular intervals. This is useful for:
+
+- Testing marketplace interventions (e.g., driver incentives, pricing strategies)
+- Comparing system-wide behaviors that can't be tested per-user
+- Controlling for time-of-day effects by alternating patterns daily
+
+```go
+// Create a store with switchback strategy
+store := toggo.NewStore(
+    toggo.WithSwitchback(
+        toggo.WithIntervalMinutes(30),  // Switch every 30 minutes
+        toggo.WithDailySwap(true),      // Reverse pattern each day
+    ),
+)
+
+// Define variants to switch between
+flag := &toggo.Flag{
+    Name:           "driver_rebate",
+    Enabled:        true,
+    DefaultVariant: "standard_rebate",
+    Variants: []toggo.Variant{
+        {Name: "standard_rebate", Weight: 50},  // 10% cashback
+        {Name: "premium_rebate", Weight: 50},   // 15% cashback
+    },
+}
+
+store.AddFlag(flag)
+
+// All drivers get the same rebate type at the same time
+ctx := toggo.Context{"driver_id": "DRV-12345"}
+rebateType, _ := store.GetVariant("driver_rebate", ctx)
+
+switch rebateType {
+case "standard_rebate":
+    applyCashback(0.10)
+case "premium_rebate":
+    applyCashback(0.15)
+}
+
+// Check timing information
+if info := toggo.GetSwitchbackInfo(store); info != nil {
+    fmt.Printf("Current interval: %d\n", info.CurrentInterval)
+    fmt.Printf("Time until next switch: %v\n", info.TimeUntilSwitch)
+}
+```
+
+**Switchback Schedule Example** (30-minute intervals, 2 variants):
+
+Day 0:
+- 00:00-00:30 → standard_rebate
+- 00:30-01:00 → premium_rebate
+- 01:00-01:30 → standard_rebate
+- ... (pattern continues)
+
+Day 1 (with daily swap):
+- 00:00-00:30 → premium_rebate (reversed)
+- 00:30-01:00 → standard_rebate (reversed)
+- 01:00-01:30 → premium_rebate (reversed)
+- ... (pattern continues)
+
+**Key Differences from Standard A/B Testing:**
+- **Standard A/B**: Each user is randomly assigned to a variant (stays consistent)
+- **Switchback**: All users see the same variant at the same time (switches periodically)
+
 ### Loading from Configuration Files
 
 #### JSON
@@ -404,6 +471,7 @@ Explore the `examples/` directory for complete working examples:
 - **simple** - Basic feature flag usage
 - **abtest** - A/B testing with variants
 - **conditional** - Conditional targeting
+- **switchback** - Time-based switchback experiments
 - **config_loader** - Loading flags from JSON/YAML
 
 Run an example:

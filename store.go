@@ -216,3 +216,9 @@ func (s *Store) Size() int {
 
 	return len(s.flags)
 }
+
+// GetRolloutStrategy returns the current rollout strategy
+// This is useful for accessing strategy-specific features or for testing
+func (s *Store) GetRolloutStrategy() RolloutStrategy {
+	return s.rolloutStrategy
+}
